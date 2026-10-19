@@ -1,0 +1,736 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Shad's Prospecting Routine</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one centered column. Home is a stack of full-width section tiles; each opens its own view (#today, #referrals, #talks, #cookbook). */
+:root{
+  --stable:#21245C; --fresh:#00ADED; --energetic:#0045C2; --passionate:#E34554; --fireball:#F05A28; --limitless:#FAB040;
+  --bg:#FFFFFF; --surface:#F1F2F7; --surface-2:#E6E8F1; --line:#D9DCEA;
+  --heading:#21245C; --text:#2A2D4D; --muted:#5F6383; --tint:rgba(0,173,237,.09); --tint-line:rgba(0,173,237,.35);
+  --btn:#21245C; --btn-text:#FFFFFF; --focus:#0045C2;
+  --font:'Poppins', Arial, sans-serif;
+  --g-today: radial-gradient(130% 140% at 0% 0%, #00ADED 0%, #0045C2 78%);
+  --g-referrals: radial-gradient(140% 140% at 100% 0%, #00ADED 0%, #21245C 72%);
+  --g-talks: linear-gradient(125deg, #E34554 0%, #F05A28 100%);
+  --g-cookbook: radial-gradient(150% 150% at 100% 0%, #2E3380 0%, #21245C 45%, #000000 120%);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0C0E26; --surface:#161939; --surface-2:#1F2349; --line:#2C3160;
+    --heading:#FFFFFF; --text:#E2E4F3; --muted:#A4A8C8; --tint:rgba(0,173,237,.12); --tint-line:rgba(0,173,237,.45);
+    --btn:#00ADED; --btn-text:#0C0E26; --focus:#00ADED; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0C0E26; --surface:#161939; --surface-2:#1F2349; --line:#2C3160;
+  --heading:#FFFFFF; --text:#E2E4F3; --muted:#A4A8C8; --tint:rgba(0,173,237,.12); --tint-line:rgba(0,173,237,.45);
+  --btn:#00ADED; --btn-text:#0C0E26; --focus:#00ADED; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:20px 72px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
+h1,h2,h3{text-wrap:balance;margin:0}
+
+/* Top nav */
+.nav{display:flex;flex-wrap:wrap;gap:4px 18px;margin-bottom:22px}
+.nav a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;padding:6px 0;border-bottom:2px solid transparent}
+.nav a[aria-current="page"]{color:var(--heading);border-bottom-color:var(--fresh)}
+.nav a:hover{color:var(--heading)}
+
+/* Home */
+.page-title{font-size:20px;font-weight:500;color:var(--heading);opacity:.9;margin:0 0 18px}
+.tiles{display:flex;flex-direction:column;gap:16px}
+.tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-height:180px;padding:24px 26px;border-radius:24px;color:#fff;text-decoration:none;overflow:hidden;transition:transform .15s ease, box-shadow .15s ease}
+.tile:hover{transform:translateY(-2px)}
+.tile .eyebrow{font-size:15px;font-weight:300;opacity:.88}
+.tile .big{font-size:clamp(28px, 6vw, 38px);font-weight:600;line-height:1.15;letter-spacing:-.01em}
+.tile .ico{position:absolute;top:22px;right:22px;width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.18);display:grid;place-items:center}
+.tile .ico svg{width:24px;height:24px}
+.t-today{background:var(--g-today);box-shadow:0 18px 36px -18px rgba(0,69,194,.75)}
+.t-referrals{background:var(--g-referrals);box-shadow:0 18px 36px -18px rgba(33,36,92,.8)}
+.t-talks{background:var(--g-talks);box-shadow:0 18px 36px -18px rgba(227,69,84,.7)}
+.t-cookbook{background:var(--g-cookbook);box-shadow:0 18px 36px -18px rgba(0,0,0,.7)}
+.t-cookbook,.sheet.mine,.head.cook{border:1px solid rgba(255,255,255,.08)}
+
+/* Section header */
+.head{border-radius:24px;padding:26px 26px 24px;color:#fff;margin-bottom:22px}
+.head .eyebrow{font-size:15px;font-weight:300;opacity:.88}
+.head h1{font-size:clamp(28px, 6vw, 36px);font-weight:600;line-height:1.15}
+
+/* Content blocks */
+.block{display:flex;flex-direction:column;gap:12px;padding-block:18px;}
+.block + .block{border-top:1px solid var(--line)}
+.block h2{font-size:17px;font-weight:600;color:var(--heading)}
+.block h2 small{font-weight:400;color:var(--muted);font-size:14px}
+ul.b, ol.n{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+ul.b li::marker{color:var(--fresh)}
+ol.n li::marker{color:var(--fresh);font-weight:600}
+ul.b ul{margin-top:6px;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.muted{color:var(--muted);font-size:14px}
+
+/* Script panels */
+.script{background:var(--tint);border:1px solid var(--tint-line);border-radius:16px;padding:14px 14px 16px 18px;display:flow-root}
+.script p{margin:0;color:var(--heading);font-size:15.5px}
+.script p + p{margin-top:10px}
+.copy{float:right;margin:0 0 8px 12px;display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:var(--btn);color:var(--btn-text);font:500 13px var(--font);padding:7px 12px;cursor:pointer}
+.copy svg{width:15px;height:15px}
+
+/* Collapsible callouts */
+details.callout{background:var(--surface);border:1px solid var(--line);border-radius:16px}
+details.callout > summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;font-weight:600;color:var(--heading)}
+details.callout > summary::-webkit-details-marker{display:none}
+details.callout > summary svg{width:20px;height:20px;flex:none;transition:transform .15s ease;color:var(--fresh)}
+details.callout[open] > summary svg{transform:rotate(90deg)}
+details.callout .inner{padding:0 18px 18px;display:flex;flex-direction:column;gap:12px}
+
+/* Counter */
+.meter{background:var(--surface);border-radius:20px;padding:20px 22px;display:flex;flex-direction:column;gap:12px}
+.meter .row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.meter .num{font-size:56px;font-weight:600;line-height:1;color:var(--heading);font-variant-numeric:tabular-nums}
+.meter .of{font-size:18px;color:var(--muted);font-weight:400}
+.track{height:12px;border-radius:999px;background:var(--surface-2);overflow:hidden}
+.fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg, #0045C2, #00ADED);transition:width .25s ease}
+.meter.hit .fill{background:linear-gradient(90deg, #F05A28, #FAB040)}
+.meter.hit .num{color:var(--fireball)}
+.group-label{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.tally{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.trow{display:flex;align-items:center;gap:12px;padding:10px 12px 10px 18px;min-height:64px}
+.trow + .trow{border-top:1px solid var(--line)}
+.trow .lab{flex:1;min-width:0;font-weight:500;color:var(--heading)}
+.trow .val{font-size:24px;font-weight:600;min-width:2ch;text-align:right;font-variant-numeric:tabular-nums;color:var(--heading)}
+.trow .val.zero{color:var(--muted);opacity:.6}
+.minus,.plus{border:0;border-radius:999px;cursor:pointer;display:grid;place-items:center;font-family:var(--font)}
+.minus{width:40px;height:40px;background:var(--surface);color:var(--muted)}
+.plus{width:52px;height:52px;background:var(--btn);color:var(--btn-text)}
+.minus svg,.plus svg{width:20px;height:20px}
+.plus:active{transform:scale(.94)}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:999px;background:var(--btn);color:var(--btn-text);font:600 16px var(--font);padding:16px 22px;cursor:pointer}
+.cta svg{width:18px;height:18px}
+.status{min-height:1.4em;font-size:14px;color:var(--muted)}
+.preview{width:100%;border-collapse:collapse;font-size:14px}
+.preview td{padding:6px 0;border-bottom:1px solid var(--line)}
+.preview td:first-child{color:var(--muted);width:3.2em;font-variant-numeric:tabular-nums}
+.preview td:last-child{text-align:right;font-weight:600;font-variant-numeric:tabular-nums;color:var(--heading)}
+textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:14px/1.5 var(--font);padding:10px}
+
+/* Checklist */
+.checks{display:flex;flex-direction:column;gap:8px}
+.check{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;background:var(--surface);cursor:pointer;color:var(--heading);font-weight:500}
+.check input{appearance:none;-webkit-appearance:none;flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--muted);display:grid;place-items:center;margin:0;cursor:pointer;background:var(--bg)}
+.check input:checked{background:var(--fresh);border-color:var(--fresh)}
+.check input:checked::after{content:"";width:7px;height:13px;border:solid #fff;border-width:0 3px 3px 0;transform:translateY(-1px) rotate(45deg)}
+.check input:checked + span{text-decoration:line-through;color:var(--muted)}
+.linkbtn{background:none;border:0;padding:6px 0;color:var(--muted);font:500 14px var(--font);text-decoration:underline;cursor:pointer;align-self:flex-start}
+.confirm{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:14px}
+.confirm button{border:0;border-radius:999px;padding:8px 14px;font:500 14px var(--font);cursor:pointer}
+.confirm .yes{background:var(--passionate);color:#fff}
+.confirm .no{background:var(--surface);color:var(--heading)}
+
+/* Cookbook links */
+.sheet{display:flex;flex-direction:column;justify-content:flex-end;gap:2px;position:relative;min-height:150px;padding:22px 24px;border-radius:22px;color:#fff;text-decoration:none;overflow:hidden}
+.sheet .eyebrow{font-size:15px;font-weight:300;opacity:.88}
+.sheet .big{font-size:clamp(26px, 5.5vw, 32px);font-weight:600;line-height:1.15}
+.sheet .ico{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:13px;background:rgba(255,255,255,.18);display:grid;place-items:center}
+.sheet .ico svg{width:22px;height:22px}
+.sheet.mine{background:var(--g-cookbook);box-shadow:0 18px 36px -18px rgba(0,0,0,.7)}
+.sheet.shad{background:var(--g-today);box-shadow:0 18px 36px -18px rgba(0,69,194,.7)}
+.sheet:hover{transform:translateY(-2px)}
+
+.view[hidden]{display:none!important}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c.8-3.3 3-5.2 5.5-5.2s4.7 1.9 5.5 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M15.8 14.5c2.2.3 3.8 1.9 4.6 4.8"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9h17M3.5 14h17M9 4v16"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12h14"/></symbol>
+</svg>
+
+<div class="wrap">
+  <nav class="nav" aria-label="Sections">
+    <a href="#home" data-nav="home">Home</a>
+    <a href="#today" data-nav="today">Prospecting Hour</a>
+    <a href="#referrals" data-nav="referrals">Referral Asks</a>
+    <a href="#talks" data-nav="talks">Talks</a>
+    <a href="#cookbook" data-nav="cookbook">Cookbook</a>
+  </nav>
+
+  <!-- HOME -->
+  <section class="view" id="v-home">
+    <h1 class="page-title">Shad's Prospecting Routine</h1>
+    <div class="tiles">
+      <a class="tile t-today" href="#today">
+        <span class="ico"><svg><use href="#i-clock"/></svg></span>
+        <span class="eyebrow" id="tileCount">0 of 25 attempts today</span>
+        <span class="big">Prospecting Hour</span>
+      </a>
+      <a class="tile t-referrals" href="#referrals">
+        <span class="ico"><svg><use href="#i-people"/></svg></span>
+        <span class="eyebrow">Clients and network</span>
+        <span class="big">Referral Asks</span>
+      </a>
+      <a class="tile t-talks" href="#talks">
+        <span class="ico"><svg><use href="#i-mic"/></svg></span>
+        <span class="eyebrow">Associations and events</span>
+        <span class="big">Talks</span>
+      </a>
+      <a class="tile t-cookbook" href="#cookbook">
+        <span class="ico"><svg><use href="#i-grid"/></svg></span>
+        <span class="eyebrow">Daily and weekly tracking</span>
+        <span class="big">Cookbook</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PROSPECTING HOUR -->
+  <section class="view" id="v-today" hidden>
+    <header class="head" style="background:var(--g-today)">
+      <div class="eyebrow">At least one hour, every day</div>
+      <h1>Prospecting Hour</h1>
+    </header>
+
+    <div class="meter" id="meter">
+      <div class="row"><span class="num" id="attemptNum">0</span><span class="of">of 25 attempts today</span></div>
+      <div class="track" role="progressbar" aria-label="Attempts toward 25" aria-valuemin="0" aria-valuemax="25" aria-valuenow="0" id="track"><div class="fill" id="fill"></div></div>
+    </div>
+
+    <div class="block">
+      <div class="group-label">Attempts</div>
+      <div class="tally" id="attemptRows"></div>
+    </div>
+
+    <div class="block">
+      <div class="group-label">Results</div>
+      <div class="tally" id="resultRows"></div>
+    </div>
+
+    <div class="block">
+      <button class="cta" id="copyBtn" type="button"><svg><use href="#i-copy"/></svg>Copy for the cookbook</button>
+      <div class="status" id="pasteHint"></div>
+      <div id="fallbackWrap" hidden><textarea class="fallback" id="fallback" readonly aria-label="Today's numbers"></textarea></div>
+      <details class="callout">
+        <summary>What gets pasted<svg><use href="#i-chev"/></svg></summary>
+        <div class="inner"><table class="preview" id="preview"></table></div>
+      </details>
+    </div>
+
+    <div class="block">
+      <h2>Today's checklist</h2>
+      <div class="checks" id="checks"></div>
+      <button class="linkbtn" id="clearBtn" type="button">Clear today</button>
+      <div class="confirm" id="confirm" hidden>
+        <span>Reset today's counts and checklist?</span>
+        <button class="yes" id="confirmYes" type="button">Clear</button>
+        <button class="no" id="confirmNo" type="button">Keep</button>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>During the hour</h2>
+      <ul class="b">
+        <li>Open the HubSpot task list and work it top to bottom. Don't decide who to call during call time.</li>
+        <li>Every voicemail or text gets a new task 2 to 3 days out, with notes on the last touch.</li>
+        <li>Learn each contact's pattern. Some take four touches before you connect.</li>
+        <li>Use the gaps. 15 free minutes is 3 more attempts.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- REFERRAL ASKS -->
+  <section class="view" id="v-referrals" hidden>
+    <header class="head" style="background:var(--g-referrals)">
+      <div class="eyebrow">Clients and network</div>
+      <h1>Referral Asks</h1>
+    </header>
+
+    <div class="block">
+      <h2>Who to ask</h2>
+      <ul class="b">
+        <li>Leaders and managers at your clients</li>
+        <li>Their salespeople. Shad's biggest account came from a salesperson's personal connection.</li>
+        <li>Your own network</li>
+        <li>Anybody. Drop the "who are they even connected to" head trash.</li>
+        <li>Keep a running list of who you asked and when.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>At kickoff: set up the 3-month review</h2>
+      <div class="script">
+        <button class="copy" type="button" data-copy><svg><use href="#i-copy"/></svg>Copy</button>
+        <p>"Here's what's going to happen. About three months in, we're going to do a business review. Brian Daniels is going to get it scheduled with you. We'll go over what's been helping, where we could do better, and where else we could help. Then I'm going to ask you what makes a good referral for you, because I like to give referrals to my clients, and what makes a good referral for us."</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>At the review</h2>
+      <ol class="n">
+        <li>What's been helping so far? Get specifics.</li>
+        <li>Where could we do better? Anything we missed or dropped?</li>
+        <li>Where else could we help? Bring your own ideas.</li>
+        <li>Referrals: who's a good referral for them, and what makes a good one for you.</li>
+      </ol>
+      <ul class="b">
+        <li>Secure the account first, then ask.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>The LinkedIn list ask</h2>
+      <div class="script">
+        <button class="copy" type="button" data-copy><svg><use href="#i-copy"/></svg>Copy</button>
+        <p>"Remember we talked about referrals? I've got an idea that's helped people with this. If I go through your LinkedIn and pull maybe 10 names, people you're connected to who might fit, and send that to you in a spreadsheet, would you be willing to take a look through it?"</p>
+      </div>
+      <div class="script">
+        <button class="copy" type="button" data-copy><svg><use href="#i-copy"/></svg>Copy</button>
+        <p>"Take a week and look through it. I know a lot of us are connected to people on LinkedIn we don't know, so if you don't know them, no harm, no foul. If you know them well, would you be willing to make an intro? I can talk you through how to have that conversation."</p>
+      </div>
+      <ul class="b">
+        <li>Send 10 to 15 names.</li>
+        <li>"Know them well" means:
+          <ul>
+            <li>They'd pick up or call you back</li>
+            <li>They'd listen to your advice</li>
+          </ul>
+        </li>
+        <li>Misses still pay off. Once they see the list, they know who you're looking for and often name someone better.</li>
+        <li>Offer the same: invite them to go through your LinkedIn for intros.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <details class="callout">
+        <summary>Build the list in Evaboot<svg><use href="#i-chev"/></svg></summary>
+        <div class="inner">
+          <ol class="n">
+            <li>Save a search template once in <a href="https://evaboot.com" target="_blank" rel="noopener">Evaboot</a>:
+              <ul class="b">
+                <li>Current title: CEO, managing partner, managing director</li>
+                <li>Company revenue size</li>
+              </ul>
+            </li>
+            <li>Before a review, drop the client into the template to pull their connections that fit.</li>
+            <li>Scan the matches in LinkedIn. Skip it if most are people you already work with.</li>
+            <li>Export to a spreadsheet and clean it down to 10 to 15 names.</li>
+            <li>Send it and give them a week.</li>
+          </ol>
+          <ul class="b">
+            <li>Revenue data can be hit or miss.</li>
+            <li>Sales rep and BDR counts are new and unverified.</li>
+            <li>Also check who wrote them a LinkedIn recommendation, or got one from them. Those people usually know each other well.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- TALKS -->
+  <section class="view" id="v-talks" hidden>
+    <header class="head" style="background:var(--g-talks)">
+      <div class="eyebrow">Associations and events</div>
+      <h1>Talks</h1>
+    </header>
+
+    <div class="block">
+      <h2>When a client says "this would be great for my industry"</h2>
+      <div class="script">
+        <button class="copy" type="button" data-copy><svg><use href="#i-copy"/></svg>Copy</button>
+        <p>"Who in the industry?"</p>
+      </div>
+      <ul class="b">
+        <li>Listen for associations and boards they sit on.</li>
+        <li>Ask for an intro to whoever runs education or events there.</li>
+        <li>Shad's ASA talks started this way. A staffing client on an ASA board introduced him to the education director.</li>
+        <li>Every talk ask counts as an attempt. Log it in Prospecting Hour.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>After a talk</h2>
+      <ul class="b">
+        <li>Set meetings with the people who come up afterward.</li>
+        <li>If someone is ready to talk now, skip the short intro call:
+          <ul>
+            <li>Make the first meeting 45 minutes</li>
+            <li>Send the survey ahead</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- COOKBOOK -->
+  <section class="view" id="v-cookbook" hidden>
+    <header class="head cook" style="background:var(--g-cookbook)">
+      <div class="eyebrow">Daily and weekly tracking</div>
+      <h1>Cookbook</h1>
+    </header>
+
+    <div class="block" style="padding-top:0">
+      <a class="sheet mine" href="https://docs.google.com/spreadsheets/d/1dvr_rHPHTu8d0ujAIZJCakSGyKyVt1v44r8kMiDIYLg/edit" target="_blank" rel="noopener">
+        <span class="ico"><svg><use href="#i-out"/></svg></span>
+        <span class="eyebrow">Dan Faber</span>
+        <span class="big">My Cookbook</span>
+      </a>
+      <a class="sheet shad" href="https://docs.google.com/spreadsheets/d/16Q4UpvIyHl24bnxDH0J5F9yDHBwHiGc_6cZv8QAhkqU/edit?usp=sharing" target="_blank" rel="noopener">
+        <span class="ico"><svg><use href="#i-out"/></svg></span>
+        <span class="eyebrow">Shad Tidler</span>
+        <span class="big">Shad's Cookbook</span>
+      </a>
+    </div>
+
+    <div class="block">
+      <h2>Every day</h2>
+      <ul class="b">
+        <li>Tap <a href="#today">Copy for the cookbook</a> when the hour is done.</li>
+        <li>Paste into today's cell in row 5 of this week's tab. It fills rows 5 to 14.</li>
+        <li>Note travel, conferences or vacation in row 3.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>Every Monday</h2>
+      <ol class="n">
+        <li>Right-click last week's tab and choose Duplicate.</li>
+        <li>Rename it Behavior Plan MMDDYY, using Monday's date. Example: Behavior Plan 102626.</li>
+        <li>Change the date in B2.</li>
+        <li>Clear last week's entries:
+          <ul class="b">
+            <li>Monday through Friday, rows 5 to 14</li>
+            <li>Day notes in row 3</li>
+            <li>Talks Done and the closed-business numbers in the Monthly Radar</li>
+          </ul>
+        </li>
+        <li>Write the week's focus in row 2.</li>
+      </ol>
+      <ul class="b">
+        <li>The Dashboard tab finds each week by its tab name, so the name has to match.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>Every Friday</h2>
+      <ul class="b">
+        <li>Open the Dashboard tab and check the weekly averages:
+          <ul>
+            <li>Prospecting attempts against 125</li>
+            <li>New meetings set against 10</li>
+            <li>New opportunities against 5</li>
+            <li>Meetings to opportunities against 50%</li>
+          </ul>
+        </li>
+        <li>Rerun your close ratio in HubSpot and enter it.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>Every month</h2>
+      <ul class="b">
+        <li>In the Monthly Radar, fill in:
+          <ul>
+            <li>Events/Talks Done</li>
+            <li>Hiring Packages Closed</li>
+            <li>Sales Coaching/Consulting Closed</li>
+            <li>The recurring and one-time dollar columns</li>
+          </ul>
+        </li>
+        <li>Log any recurring adds or drops on the Recurring Adds &amp; Drops tab.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>At year end</h2>
+      <ul class="b">
+        <li>Rank your prospecting activities by the meetings and opportunities each one produced.</li>
+        <li>Do more of the top ones instead of adding something new. For Shad that's:
+          <ul>
+            <li>More business with current clients</li>
+            <li>Referrals from clients and his network</li>
+            <li>Talks</li>
+            <li>Webinars</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <details class="callout">
+        <summary>What counts as a prospecting attempt<svg><use href="#i-chev"/></svg></summary>
+        <div class="inner">
+          <ul class="b">
+            <li>Picking up the phone</li>
+            <li>Asking anyone for a referral</li>
+            <li>Reaching out to get a talk</li>
+            <li>Talking to a current client about more ways to help</li>
+          </ul>
+          <p class="muted" style="margin:0">If it grows the business, it counts.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var GOAL = 25;
+  var ATTEMPTS = [
+    {k:"ref",    label:"Referral ask"},
+    {k:"client", label:"Client add-on ask"},
+    {k:"talk",   label:"Talk or event ask"},
+    {k:"call",   label:"Call or follow-up"}
+  ];
+  var RESULTS = [
+    {k:"given",     label:"Referral given"},
+    {k:"received",  label:"Referral received"},
+    {k:"talkSched", label:"Talk or event scheduled"},
+    {k:"set",       label:"First meeting set"},
+    {k:"held",      label:"Prospect meeting held"},
+    {k:"coach",     label:"Coaching opportunity"},
+    {k:"hire",      label:"Hiring opportunity"}
+  ];
+  var CHECKS = [
+    {k:"block",  label:"Hour blocked on the calendar"},
+    {k:"tasks",  label:"HubSpot task list worked top to bottom"},
+    {k:"follow", label:"Every voicemail or text has a follow-up task"},
+    {k:"pasted", label:"Numbers pasted into the cookbook"}
+  ];
+  var KEY = "shad-hour-v1";
+
+  function today(){
+    var d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+  }
+  function blank(){
+    var c = {}; ATTEMPTS.concat(RESULTS).forEach(function(r){ c[r.k] = 0; });
+    var ch = {}; CHECKS.forEach(function(r){ ch[r.k] = false; });
+    return {date: today(), counts: c, checks: ch, updatedAt: 0};
+  }
+  function normalize(s){
+    var b = blank();
+    if (!s || typeof s !== "object" || s.date !== b.date) return b;
+    Object.keys(b.counts).forEach(function(k){ var v = s.counts && s.counts[k]; b.counts[k] = (typeof v === "number" && v >= 0) ? Math.floor(v) : 0; });
+    Object.keys(b.checks).forEach(function(k){ b.checks[k] = !!(s.checks && s.checks[k]); });
+    b.updatedAt = typeof s.updatedAt === "number" ? s.updatedAt : 0;
+    return b;
+  }
+
+  var state;
+  try { state = normalize(JSON.parse(localStorage.getItem(KEY) || "null")); } catch(e){ state = blank(); }
+  function saveLocal(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  function attempts(){ return ATTEMPTS.reduce(function(a,r){ return a + state.counts[r.k]; }, 0); }
+  function cookbookRows(){
+    var c = state.counts;
+    return [
+      ["5",  "Prospecting Attempts", attempts()],
+      ["6",  "Referrals - Asked For", c.ref],
+      ["7",  "Referrals - Given", c.given],
+      ["8",  "Referrals - Received", c.received],
+      ["9",  "Events/Talks Asked For", c.talk],
+      ["10", "Events/Talks Scheduled", c.talkSched],
+      ["11", "New 1st Appointments Scheduled", c.set],
+      ["12", "Prospect Meetings Held", c.held],
+      ["13", "New Sales Coaching Opportunities", c.coach],
+      ["14", "New Hiring Opportunities", c.hire]
+    ];
+  }
+
+  // ---------- build rows ----------
+  function buildRows(list, host){
+    list.forEach(function(r){
+      var row = document.createElement("div"); row.className = "trow";
+      row.innerHTML =
+        '<span class="lab"></span><span class="val" data-val="'+r.k+'">0</span>' +
+        '<button class="minus" type="button" data-dec="'+r.k+'"><svg><use href="#i-minus"/></svg></button>' +
+        '<button class="plus" type="button" data-inc="'+r.k+'"><svg><use href="#i-plus"/></svg></button>';
+      row.querySelector(".lab").textContent = r.label;
+      row.querySelector(".minus").setAttribute("aria-label", "Remove one: " + r.label);
+      row.querySelector(".plus").setAttribute("aria-label", "Add one: " + r.label);
+      host.appendChild(row);
+    });
+  }
+  buildRows(ATTEMPTS, document.getElementById("attemptRows"));
+  buildRows(RESULTS, document.getElementById("resultRows"));
+
+  var checksHost = document.getElementById("checks");
+  CHECKS.forEach(function(r){
+    var lab = document.createElement("label"); lab.className = "check";
+    lab.innerHTML = '<input type="checkbox" id="chk-'+r.k+'" data-check="'+r.k+'"><span></span>';
+    lab.querySelector("span").textContent = r.label;
+    checksHost.appendChild(lab);
+  });
+
+  // ---------- render ----------
+  function dayName(){
+    var d = new Date().getDay();
+    return ["","Monday","Tuesday","Wednesday","Thursday","Friday",""][d];
+  }
+  function render(){
+    var a = attempts();
+    document.getElementById("attemptNum").textContent = a;
+    var pct = Math.min(100, Math.round(a / GOAL * 100));
+    document.getElementById("fill").style.width = pct + "%";
+    document.getElementById("track").setAttribute("aria-valuenow", String(Math.min(a, GOAL)));
+    document.getElementById("meter").classList.toggle("hit", a >= GOAL);
+    document.getElementById("tileCount").textContent = a + " of " + GOAL + " attempts today";
+    document.querySelectorAll("[data-val]").forEach(function(el){
+      var v = state.counts[el.getAttribute("data-val")];
+      el.textContent = v; el.classList.toggle("zero", v === 0);
+    });
+    document.querySelectorAll("[data-check]").forEach(function(el){ el.checked = !!state.checks[el.getAttribute("data-check")]; });
+    var day = dayName();
+    document.getElementById("pasteHint").textContent = day
+      ? "Paste into " + day + "'s cell in row 5 of this week's tab. It fills rows 5 to 14."
+      : "Paste into the day's cell in row 5 of this week's tab. It fills rows 5 to 14.";
+    var tbl = document.getElementById("preview"); tbl.textContent = "";
+    cookbookRows().forEach(function(r){
+      var tr = document.createElement("tr");
+      [ "Row " + r[0], r[1], String(r[2]) ].forEach(function(t, i){
+        var td = document.createElement("td"); td.textContent = t;
+        if (i === 0) td.style.width = "4.2em";
+        tr.appendChild(td);
+      });
+      tbl.appendChild(tr);
+    });
+  }
+
+  // ---------- changes ----------
+  function rollIfNewDay(){ if (state.date !== today()) { state = blank(); } }
+  function changed(){
+    state.updatedAt = Date.now();
+    saveLocal(); render(); queueRemote();
+  }
+  document.addEventListener("click", function(e){
+    var inc = e.target.closest("[data-inc]"), dec = e.target.closest("[data-dec]");
+    if (inc || dec) {
+      rollIfNewDay();
+      var k = (inc || dec).getAttribute(inc ? "data-inc" : "data-dec");
+      state.counts[k] = Math.max(0, state.counts[k] + (inc ? 1 : -1));
+      changed();
+    }
+  });
+  checksHost.addEventListener("change", function(e){
+    var k = e.target.getAttribute("data-check"); if (!k) return;
+    rollIfNewDay();
+    state.checks[k] = e.target.checked; changed();
+  });
+
+  var confirmBox = document.getElementById("confirm");
+  document.getElementById("clearBtn").addEventListener("click", function(){ confirmBox.hidden = false; });
+  document.getElementById("confirmNo").addEventListener("click", function(){ confirmBox.hidden = true; });
+  document.getElementById("confirmYes").addEventListener("click", function(){
+    state = blank(); confirmBox.hidden = true; changed();
+  });
+
+  // ---------- copy ----------
+  var hint = document.getElementById("pasteHint");
+  function copyText(text, onOk, onFail){
+    try {
+      navigator.clipboard.writeText(text).then(onOk, onFail);
+    } catch(e){ onFail(); }
+  }
+  document.getElementById("copyBtn").addEventListener("click", function(){
+    var text = cookbookRows().map(function(r){ return r[2]; }).join("\n");
+    var fbWrap = document.getElementById("fallbackWrap"), fb = document.getElementById("fallback");
+    copyText(text, function(){
+      fbWrap.hidden = true;
+      hint.textContent = "Copied. " + hint.textContent.replace(/^Copied\. /, "");
+    }, function(){
+      fb.value = text; fbWrap.hidden = false; fb.focus(); fb.select();
+      hint.textContent = "Copy didn't go through here. The numbers are selected below; copy them from there.";
+    });
+  });
+  document.querySelectorAll("[data-copy]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var panel = btn.closest(".script");
+      var text = Array.prototype.map.call(panel.querySelectorAll("p"), function(p){ return p.textContent; }).join("\n\n");
+      var label = btn.lastChild;
+      copyText(text, function(){
+        label.textContent = "Copied";
+        setTimeout(function(){ label.textContent = "Copy"; }, 1600);
+      }, function(){
+        var range = document.createRange(); range.selectNodeContents(panel.querySelector("p"));
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        label.textContent = "Selected";
+        setTimeout(function(){ label.textContent = "Copy"; }, 1600);
+      });
+    });
+  });
+
+  // ---------- routing ----------
+  var VIEWS = ["home","today","referrals","talks","cookbook"];
+  function route(){
+    var h = (location.hash || "#home").slice(1);
+    if (VIEWS.indexOf(h) < 0) h = "home";
+    VIEWS.forEach(function(v){ document.getElementById("v-" + v).hidden = (v !== h); });
+    document.querySelectorAll("[data-nav]").forEach(function(a){
+      if (a.getAttribute("data-nav") === h) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+    });
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener("hashchange", route);
+  document.addEventListener("visibilitychange", function(){
+    if (!document.hidden && state.date !== today()) { state = blank(); saveLocal(); render(); }
+  });
+
+  // ---------- sync across devices (owner's private db subtree) ----------
+  var ref = null, writeTimer = null, writing = false, again = false;
+  function queueRemote(){
+    if (!ref) return;
+    clearTimeout(writeTimer);
+    writeTimer = setTimeout(pushRemote, 700);
+  }
+  function pushRemote(){
+    if (!ref) return;
+    if (writing) { again = true; return; }
+    writing = true;
+    var body = JSON.parse(JSON.stringify(state));
+    ref.set(body).catch(function(err){
+      if (err && (err.code === "invalid_argument" || err.code === "revoked" || err.code === "not_granted")) ref = null;
+    }).then(function(){
+      writing = false;
+      if (again) { again = false; pushRemote(); }
+    });
+  }
+  function adopt(remote){
+    if (!remote) return;
+    var r = normalize(remote);
+    if (r.date === today() && r.updatedAt > state.updatedAt) { state = r; saveLocal(); render(); }
+  }
+  async function initSync(){
+    try {
+      if (!window.claude || typeof window.claude.use !== "function") return;
+      var db = await window.claude.use("db");
+      var user = await window.claude.use("user");
+      if (!db || !user) return;
+      var uid = await user.id();
+      if (!uid) return;
+      var docRef = db.doc("data/users/" + uid + "/today");
+      var snap = await docRef.get();
+      ref = docRef;
+      var remote = snap.exists ? snap.data() : null;
+      var r = remote ? normalize(remote) : null;
+      if (r && r.date === today() && r.updatedAt > state.updatedAt) { adopt(remote); }
+      else if (state.updatedAt > 0 && (!r || r.date !== today() || state.updatedAt > r.updatedAt)) { pushRemote(); }
+      docRef.onSnapshot(function(s){ if (s.exists) adopt(s.data()); }, function(){ });
+    } catch(e) { ref = null; }
+  }
+
+  render();
+  route();
+  initSync();
+})();
+</script>
+
+</body></html>
