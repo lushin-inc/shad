@@ -142,7 +142,9 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
-  <symbol id="i-people" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c.8-3.3 3-5.2 5.5-5.2s4.7 1.9 5.5 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M15.8 14.5c2.2.3 3.8 1.9 4.6 4.8"/></symbol>
+  <symbol id="i-headphones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3.5" y="14" width="4.5" height="6.5" rx="1.6"/><rect x="16" y="14" width="4.5" height="6.5" rx="1.6"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6.5h10M10 12h10M10 17.5h10"/><path d="m3.5 6.5 1.5 1.5 2.5-3M3.5 12l1.5 1.5 2.5-3M3.5 17.5l1.5 1.5 2.5-3"/></symbol>
+  <symbol id="i-people"viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c.8-3.3 3-5.2 5.5-5.2s4.7 1.9 5.5 5.2"/><circle cx="17" cy="9.5" r="2.5"/><path d="M15.8 14.5c2.2.3 3.8 1.9 4.6 4.8"/></symbol>
   <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></symbol>
   <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 9h17M3.5 14h17M9 4v16"/></symbol>
   <symbol id="i-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
@@ -155,6 +157,7 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
 <div class="wrap">
   <nav class="nav" aria-label="Sections">
     <a href="#home" data-nav="home">Home</a>
+    <a href="#setup" data-nav="setup">Setup</a>
     <a href="#today" data-nav="today">Prospecting Hour</a>
     <a href="#referrals" data-nav="referrals">Referral Asks</a>
     <a href="#talks" data-nav="talks">Talks</a>
@@ -165,6 +168,16 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
   <section class="view" id="v-home">
     <h1 class="page-title">Shad's Prospecting Routine</h1>
     <div class="tiles">
+      <a class="tile t-today" href="https://app.speechify.com/item/0286212d-a778-4281-bcf9-c82b47771567" target="_blank" rel="noopener">
+        <span class="ico"><svg><use href="#i-headphones"/></svg></span>
+        <span class="eyebrow">About 16 minutes in Speechify</span>
+        <span class="big">Listen</span>
+      </a>
+      <a class="tile t-today" href="#setup">
+        <span class="ico"><svg><use href="#i-list"/></svg></span>
+        <span class="eyebrow" id="setupTile">0 of 12 in place</span>
+        <span class="big">Setup</span>
+      </a>
       <a class="tile t-today" href="#today">
         <span class="ico"><svg><use href="#i-clock"/></svg></span>
         <span class="eyebrow" id="tileCount">0 of 25 attempts today</span>
@@ -185,6 +198,61 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
         <span class="eyebrow">Daily and weekly tracking</span>
         <span class="big">Cookbook</span>
       </a>
+    </div>
+  </section>
+
+  <!-- SETUP -->
+  <section class="view" id="v-setup" hidden>
+    <header class="head" style="background:var(--g-today)">
+      <div class="eyebrow">Before you start</div>
+      <h1>Setup</h1>
+    </header>
+
+    <div class="meter" id="setupMeter">
+      <div class="row"><span class="num" id="setupNum">0</span><span class="of">of 12 in place</span></div>
+      <div class="track" role="progressbar" aria-label="Setup items in place" aria-valuemin="0" aria-valuemax="12" aria-valuenow="0" id="setupTrack"><div class="fill" id="setupFill"></div></div>
+    </div>
+
+    <div class="block">
+      <div class="group-label">Calendar</div>
+      <div class="checks">
+        <label class="check"><input type="checkbox" id="su-hour" data-setup="hour"><span>A recurring prospecting hour on your calendar, every weekday</span></label>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="group-label">Cookbook</div>
+      <div class="checks">
+        <label class="check"><input type="checkbox" id="su-targets" data-setup="targets"><span>Your targets set in <a href="https://docs.google.com/spreadsheets/d/1dvr_rHPHTu8d0ujAIZJCakSGyKyVt1v44r8kMiDIYLg/edit" target="_blank" rel="noopener">your cookbook</a>: daily numbers in column B of the week tab, goals in column C of the Dashboard</span></label>
+        <label class="check"><input type="checkbox" id="su-focus" data-setup="focus"><span>This week's focus written in row 2</span></label>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="group-label">HubSpot</div>
+      <div class="checks">
+        <label class="check"><input type="checkbox" id="su-tasks" data-setup="tasks"><span>Every open follow-up moved into HubSpot tasks, with notes on the last touch</span></label>
+        <label class="check"><input type="checkbox" id="su-queue" data-setup="queue"><span>Tasks queued for this week's referral asks and client add-on conversations</span></label>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="group-label">Referrals</div>
+      <div class="checks">
+        <label class="check"><input type="checkbox" id="su-asklist" data-setup="asklist"><span>A running list of everyone you'll ask for referrals, with the date you last asked each one</span></label>
+        <label class="check"><input type="checkbox" id="su-ideal" data-setup="ideal"><span>Your answer to "what makes a good referral for us": titles, company size and industries</span></label>
+        <label class="check"><input type="checkbox" id="su-evaboot" data-setup="evaboot"><span><a href="https://evaboot.com" target="_blank" rel="noopener">Evaboot</a> set up, with a saved search template for those titles and revenue size</span></label>
+        <label class="check"><input type="checkbox" id="su-kickoff" data-setup="kickoff"><span>The 3-month business review preview added to your client kickoff</span></label>
+        <label class="check"><input type="checkbox" id="su-reviews" data-setup="reviews"><span>Current clients due for a business review, scheduled</span></label>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="group-label">Talks</div>
+      <div class="checks">
+        <label class="check"><input type="checkbox" id="su-boards" data-setup="boards"><span>A list of clients who sit on association boards or keep saying "this would be great for my industry"</span></label>
+        <label class="check"><input type="checkbox" id="su-survey" data-setup="survey"><span>Your pre-meeting survey ready to send ahead of 45-minute first meetings</span></label>
+      </div>
     </div>
   </section>
 
@@ -664,7 +732,7 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
   });
 
   // ---------- routing ----------
-  var VIEWS = ["home","today","referrals","talks","cookbook"];
+  var VIEWS = ["home","setup","today","referrals","talks","cookbook"];
   function route(){
     var h = (location.hash || "#home").slice(1);
     if (VIEWS.indexOf(h) < 0) h = "home";
@@ -722,9 +790,79 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
     } catch(e) { ref = null; }
   }
 
+  // ---------- setup checklist (persists until changed) ----------
+  var SKEY = "shad-setup-v1";
+  var setup = null;
+  try { setup = JSON.parse(localStorage.getItem(SKEY) || "null"); } catch(e){ setup = null; }
+  if (!setup || typeof setup !== "object" || !setup.checks || typeof setup.checks !== "object") setup = {checks:{}, updatedAt:0};
+  var setupBoxes = Array.prototype.slice.call(document.querySelectorAll("[data-setup]"));
+  var SETUP_TOTAL = setupBoxes.length;
+  function renderSetup(){
+    var n = 0;
+    setupBoxes.forEach(function(b){ var on = !!setup.checks[b.getAttribute("data-setup")]; b.checked = on; if (on) n++; });
+    document.getElementById("setupNum").textContent = n;
+    document.getElementById("setupFill").style.width = Math.round(n / SETUP_TOTAL * 100) + "%";
+    document.getElementById("setupTrack").setAttribute("aria-valuenow", String(n));
+    document.getElementById("setupMeter").classList.toggle("hit", n === SETUP_TOTAL);
+    document.getElementById("setupTile").textContent = n + " of " + SETUP_TOTAL + " in place";
+  }
+  var setupRef = null, setupTimer = null, setupWriting = false, setupAgain = false;
+  function pushSetup(){
+    if (!setupRef) return;
+    if (setupWriting) { setupAgain = true; return; }
+    setupWriting = true;
+    setupRef.set(JSON.parse(JSON.stringify(setup))).catch(function(err){
+      if (err && (err.code === "invalid_argument" || err.code === "revoked" || err.code === "not_granted")) setupRef = null;
+    }).then(function(){
+      setupWriting = false;
+      if (setupAgain) { setupAgain = false; pushSetup(); }
+    });
+  }
+  function queueSetupRemote(){
+    if (!setupRef) return;
+    clearTimeout(setupTimer);
+    setupTimer = setTimeout(pushSetup, 700);
+  }
+  function adoptSetup(remote){
+    if (!remote || typeof remote.checks !== "object") return;
+    var at = typeof remote.updatedAt === "number" ? remote.updatedAt : 0;
+    if (at > setup.updatedAt) {
+      var c = {}; setupBoxes.forEach(function(b){ var k = b.getAttribute("data-setup"); c[k] = !!remote.checks[k]; });
+      setup = {checks: c, updatedAt: at};
+      try { localStorage.setItem(SKEY, JSON.stringify(setup)); } catch(e){}
+      renderSetup();
+    }
+  }
+  document.getElementById("v-setup").addEventListener("change", function(e){
+    var k = e.target.getAttribute && e.target.getAttribute("data-setup"); if (!k) return;
+    setup.checks[k] = e.target.checked; setup.updatedAt = Date.now();
+    try { localStorage.setItem(SKEY, JSON.stringify(setup)); } catch(err){}
+    renderSetup(); queueSetupRemote();
+  });
+  async function initSetupSync(){
+    try {
+      if (!window.claude || typeof window.claude.use !== "function") return;
+      var db = await window.claude.use("db");
+      var user = await window.claude.use("user");
+      if (!db || !user) return;
+      var uid = await user.id();
+      if (!uid) return;
+      var docRef = db.doc("data/users/" + uid + "/setup");
+      var snap = await docRef.get();
+      setupRef = docRef;
+      var remote = snap.exists ? snap.data() : null;
+      var at = remote && typeof remote.updatedAt === "number" ? remote.updatedAt : 0;
+      if (remote && at > setup.updatedAt) adoptSetup(remote);
+      else if (setup.updatedAt > at) pushSetup();
+      docRef.onSnapshot(function(s){ if (s.exists) adoptSetup(s.data()); }, function(){ });
+    } catch(e) { setupRef = null; }
+  }
+
   render();
+  renderSetup();
   route();
   initSync();
+  initSetupSync();
 })();
 </script>
 
