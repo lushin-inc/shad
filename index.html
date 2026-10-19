@@ -13,9 +13,9 @@
   --btn:#21245C; --btn-text:#FFFFFF; --focus:#0045C2;
   --font:'Poppins', Arial, sans-serif;
   --g-today: radial-gradient(130% 140% at 0% 0%, #00ADED 0%, #0045C2 78%);
-  --g-referrals: radial-gradient(140% 140% at 100% 0%, #00ADED 0%, #21245C 72%);
-  --g-talks: linear-gradient(125deg, #E34554 0%, #F05A28 100%);
-  --g-cookbook: radial-gradient(150% 150% at 100% 0%, #2E3380 0%, #21245C 45%, #000000 120%);
+  --g-referrals: var(--g-today);
+  --g-talks: var(--g-today);
+  --g-cookbook: var(--g-today);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -51,11 +51,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .tile .big{font-size:clamp(28px, 6vw, 38px);font-weight:600;line-height:1.15;letter-spacing:-.01em}
 .tile .ico{position:absolute;top:22px;right:22px;width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.18);display:grid;place-items:center}
 .tile .ico svg{width:24px;height:24px}
-.t-today{background:var(--g-today);box-shadow:0 18px 36px -18px rgba(0,69,194,.75)}
-.t-referrals{background:var(--g-referrals);box-shadow:0 18px 36px -18px rgba(33,36,92,.8)}
-.t-talks{background:var(--g-talks);box-shadow:0 18px 36px -18px rgba(227,69,84,.7)}
-.t-cookbook{background:var(--g-cookbook);box-shadow:0 18px 36px -18px rgba(0,0,0,.7)}
-.t-cookbook,.sheet.mine,.head.cook{border:1px solid rgba(255,255,255,.08)}
+.t-today,.t-referrals,.t-talks,.t-cookbook{background:var(--g-today);box-shadow:0 18px 36px -18px rgba(0,69,194,.75)}
 
 /* Section header */
 .head{border-radius:24px;padding:26px 26px 24px;color:#fff;margin-bottom:22px}
@@ -137,8 +133,7 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
 .sheet .big{font-size:clamp(26px, 5.5vw, 32px);font-weight:600;line-height:1.15}
 .sheet .ico{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:13px;background:rgba(255,255,255,.18);display:grid;place-items:center}
 .sheet .ico svg{width:22px;height:22px}
-.sheet.mine{background:var(--g-cookbook);box-shadow:0 18px 36px -18px rgba(0,0,0,.7)}
-.sheet.shad{background:var(--g-today);box-shadow:0 18px 36px -18px rgba(0,69,194,.7)}
+.sheet.mine,.sheet.shad{background:var(--g-today);box-shadow:0 18px 36px -18px rgba(0,69,194,.75)}
 .sheet:hover{transform:translateY(-2px)}
 
 .view[hidden]{display:none!important}
