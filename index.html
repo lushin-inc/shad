@@ -30,38 +30,40 @@
   --btn:#00ADED; --btn-text:#0C0E26; --focus:#00ADED; color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:720px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:20px 72px}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.view:not(#v-home){max-width:760px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:20px 72px}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
 h1,h2,h3{text-wrap:balance;margin:0}
 
 /* Top nav */
 .nav{display:flex;flex-wrap:wrap;gap:4px 18px;margin-bottom:22px}
-.nav a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;padding:6px 0;border-bottom:2px solid transparent}
+.nav a{text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;padding:6px 0;border-bottom:2px solid transparent}
 .nav a[aria-current="page"]{color:var(--heading);border-bottom-color:var(--fresh)}
 .nav a:hover{color:var(--heading)}
 
 /* Home */
-.page-title{font-size:20px;font-weight:500;color:var(--heading);opacity:.9;margin:0 0 18px}
-.tiles{display:flex;flex-direction:column;gap:16px}
-.tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-height:180px;padding:24px 26px;border-radius:24px;color:#fff;text-decoration:none;overflow:hidden;transition:transform .15s ease, box-shadow .15s ease}
+.listen{display:inline-flex;align-items:center;gap:8px;padding:8px 18px 8px 14px;border-radius:999px;background:var(--g-today);color:#fff;font:600 14px var(--font);text-decoration:none;box-shadow:0 10px 22px -12px rgba(0,69,194,.75);margin-bottom:22px}
+.listen svg{width:17px;height:17px}
+.listen:hover{transform:translateY(-1px)}
+.page-title{font-size:18px;font-weight:500;color:var(--heading);opacity:.9;margin:0 0 16px}
+.tiles{display:grid;grid-template-columns:repeat(5, minmax(0, 1fr));gap:18px}
+@media (max-width: 860px){ .tiles{grid-template-columns:repeat(2, minmax(0, 1fr));gap:14px} }
+.tile{display:flex;flex-direction:column;justify-content:flex-end;aspect-ratio:5 / 7;max-width:100%;padding:20px;border-radius:20px;color:#fff;text-decoration:none;overflow:hidden;transition:transform .15s ease, box-shadow .15s ease}
 .tile:hover{transform:translateY(-2px)}
-.tile .eyebrow{font-size:15px;font-weight:300;opacity:.88}
-.tile .big{font-size:clamp(28px, 6vw, 38px);font-weight:600;line-height:1.15;letter-spacing:-.01em}
-.tile .ico{position:absolute;top:22px;right:22px;width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.18);display:grid;place-items:center}
-.tile .ico svg{width:24px;height:24px}
+.tile .big{font-size:clamp(18px, 2vw, 23px);font-weight:600;line-height:1.15;letter-spacing:-.01em}
 .t-today,.t-referrals,.t-talks,.t-cookbook{background:var(--g-today);box-shadow:0 18px 36px -18px rgba(0,69,194,.75)}
 
 /* Section header */
-.head{border-radius:24px;padding:26px 26px 24px;color:#fff;margin-bottom:22px}
-.head .eyebrow{font-size:15px;font-weight:300;opacity:.88}
-.head h1{font-size:clamp(28px, 6vw, 36px);font-weight:600;line-height:1.15}
+.head{border-radius:18px;padding:18px 22px;color:#fff;margin-bottom:16px}
+.head .eyebrow{font-size:13px;font-weight:300;opacity:.88}
+.head h1{font-size:clamp(21px, 3.5vw, 26px);font-weight:600;line-height:1.15}
 
 /* Content blocks */
-.block{display:flex;flex-direction:column;gap:12px;padding-block:18px;}
+.block{display:flex;flex-direction:column;gap:10px;padding-block:14px;}
 .block + .block{border-top:1px solid var(--line)}
-.block h2{font-size:17px;font-weight:600;color:var(--heading)}
+.block h2{font-size:15px;font-weight:600;color:var(--heading)}
 .block h2 small{font-weight:400;color:var(--muted);font-size:14px}
 ul.b, ol.n{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 ul.b li::marker{color:var(--fresh)}
@@ -85,27 +87,27 @@ details.callout[open] > summary svg{transform:rotate(90deg)}
 details.callout .inner{padding:0 18px 18px;display:flex;flex-direction:column;gap:12px}
 
 /* Counter */
-.meter{background:var(--surface);border-radius:20px;padding:20px 22px;display:flex;flex-direction:column;gap:12px}
-.meter .row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.meter .num{font-size:56px;font-weight:600;line-height:1;color:var(--heading);font-variant-numeric:tabular-nums}
-.meter .of{font-size:18px;color:var(--muted);font-weight:400}
-.track{height:12px;border-radius:999px;background:var(--surface-2);overflow:hidden}
+.meter{background:var(--surface);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.meter .row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.meter .num{font-size:40px;font-weight:600;line-height:1;color:var(--heading);font-variant-numeric:tabular-nums}
+.meter .of{font-size:15px;color:var(--muted);font-weight:400}
+.track{height:10px;border-radius:999px;background:var(--surface-2);overflow:hidden}
 .fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg, #0045C2, #00ADED);transition:width .25s ease}
 .meter.hit .fill{background:linear-gradient(90deg, #F05A28, #FAB040)}
 .meter.hit .num{color:var(--fireball)}
 .group-label{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px}
-.tally{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden}
-.trow{display:flex;align-items:center;gap:12px;padding:10px 12px 10px 18px;min-height:64px}
+.tally{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.trow{display:flex;align-items:center;gap:10px;padding:7px 10px 7px 16px;min-height:52px}
 .trow + .trow{border-top:1px solid var(--line)}
 .trow .lab{flex:1;min-width:0;font-weight:500;color:var(--heading)}
-.trow .val{font-size:24px;font-weight:600;min-width:2ch;text-align:right;font-variant-numeric:tabular-nums;color:var(--heading)}
+.trow .val{font-size:19px;font-weight:600;min-width:2ch;text-align:right;font-variant-numeric:tabular-nums;color:var(--heading)}
 .trow .val.zero{color:var(--muted);opacity:.6}
 .minus,.plus{border:0;border-radius:999px;cursor:pointer;display:grid;place-items:center;font-family:var(--font)}
-.minus{width:40px;height:40px;background:var(--surface);color:var(--muted)}
-.plus{width:52px;height:52px;background:var(--btn);color:var(--btn-text)}
-.minus svg,.plus svg{width:20px;height:20px}
+.minus{width:34px;height:34px;background:var(--surface);color:var(--muted)}
+.plus{width:42px;height:42px;background:var(--btn);color:var(--btn-text)}
+.minus svg,.plus svg{width:17px;height:17px}
 .plus:active{transform:scale(.94)}
-.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:999px;background:var(--btn);color:var(--btn-text);font:600 16px var(--font);padding:16px 22px;cursor:pointer}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:999px;background:var(--btn);color:var(--btn-text);font:600 14px var(--font);padding:12px 20px;cursor:pointer}
 .cta svg{width:18px;height:18px}
 .status{min-height:1.4em;font-size:14px;color:var(--muted)}
 .preview{width:100%;border-collapse:collapse;font-size:14px}
@@ -116,10 +118,10 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
 
 /* Checklist */
 .checks{display:flex;flex-direction:column;gap:8px}
-.check{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;background:var(--surface);cursor:pointer;color:var(--heading);font-weight:500}
-.check input{appearance:none;-webkit-appearance:none;flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--muted);display:grid;place-items:center;margin:0;cursor:pointer;background:var(--bg)}
+.check{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:var(--surface);cursor:pointer;color:var(--heading);font-weight:500}
+.check input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;border-radius:7px;border:2px solid var(--muted);display:grid;place-items:center;margin:0;cursor:pointer;background:var(--bg)}
 .check input:checked{background:var(--fresh);border-color:var(--fresh)}
-.check input:checked::after{content:"";width:7px;height:13px;border:solid #fff;border-width:0 3px 3px 0;transform:translateY(-1px) rotate(45deg)}
+.check input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 3px 3px 0;transform:translateY(-1px) rotate(45deg)}
 .check input:checked + span{text-decoration:line-through;color:var(--muted)}
 .linkbtn{background:none;border:0;padding:6px 0;color:var(--muted);font:500 14px var(--font);text-decoration:underline;cursor:pointer;align-self:flex-start}
 .confirm{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:14px}
@@ -128,11 +130,9 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
 .confirm .no{background:var(--surface);color:var(--heading)}
 
 /* Cookbook links */
-.sheet{display:flex;flex-direction:column;justify-content:flex-end;gap:2px;position:relative;min-height:150px;padding:22px 24px;border-radius:22px;color:#fff;text-decoration:none;overflow:hidden}
-.sheet .eyebrow{font-size:15px;font-weight:300;opacity:.88}
-.sheet .big{font-size:clamp(26px, 5.5vw, 32px);font-weight:600;line-height:1.15}
-.sheet .ico{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:13px;background:rgba(255,255,255,.18);display:grid;place-items:center}
-.sheet .ico svg{width:22px;height:22px}
+.block.sheets{display:grid;grid-template-columns:repeat(2, minmax(0, 200px));gap:18px}
+.sheet{display:flex;flex-direction:column;justify-content:flex-end;aspect-ratio:5 / 7;max-width:100%;padding:20px;border-radius:20px;color:#fff;text-decoration:none;overflow:hidden;transition:transform .15s ease}
+.sheet .big{font-size:clamp(18px, 2vw, 23px);font-weight:600;line-height:1.15;letter-spacing:-.01em}
 .sheet.mine,.sheet.shad{background:var(--g-today);box-shadow:0 18px 36px -18px rgba(0,69,194,.75)}
 .sheet:hover{transform:translateY(-2px)}
 
@@ -166,38 +166,14 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
 
   <!-- HOME -->
   <section class="view" id="v-home">
+    <a class="listen" href="https://app.speechify.com/item/0286212d-a778-4281-bcf9-c82b47771567" target="_blank" rel="noopener"><svg><use href="#i-headphones"/></svg>Listen</a>
     <h1 class="page-title">Shad's Prospecting Routine</h1>
     <div class="tiles">
-      <a class="tile t-today" href="https://app.speechify.com/item/0286212d-a778-4281-bcf9-c82b47771567" target="_blank" rel="noopener">
-        <span class="ico"><svg><use href="#i-headphones"/></svg></span>
-        <span class="eyebrow">About 16 minutes in Speechify</span>
-        <span class="big">Listen</span>
-      </a>
-      <a class="tile t-today" href="#setup">
-        <span class="ico"><svg><use href="#i-list"/></svg></span>
-        <span class="eyebrow" id="setupTile">0 of 12 in place</span>
-        <span class="big">Setup</span>
-      </a>
-      <a class="tile t-today" href="#today">
-        <span class="ico"><svg><use href="#i-clock"/></svg></span>
-        <span class="eyebrow" id="tileCount">0 of 25 attempts today</span>
-        <span class="big">Prospecting Hour</span>
-      </a>
-      <a class="tile t-referrals" href="#referrals">
-        <span class="ico"><svg><use href="#i-people"/></svg></span>
-        <span class="eyebrow">Clients and network</span>
-        <span class="big">Referral Asks</span>
-      </a>
-      <a class="tile t-talks" href="#talks">
-        <span class="ico"><svg><use href="#i-mic"/></svg></span>
-        <span class="eyebrow">Associations and events</span>
-        <span class="big">Talks</span>
-      </a>
-      <a class="tile t-cookbook" href="#cookbook">
-        <span class="ico"><svg><use href="#i-grid"/></svg></span>
-        <span class="eyebrow">Daily and weekly tracking</span>
-        <span class="big">Cookbook</span>
-      </a>
+      <a class="tile t-today" href="#setup"><span class="big">Setup</span></a>
+      <a class="tile t-today" href="#today"><span class="big">Prospecting Hour</span></a>
+      <a class="tile t-referrals" href="#referrals"><span class="big">Referral Asks</span></a>
+      <a class="tile t-talks" href="#talks"><span class="big">Talks</span></a>
+      <a class="tile t-cookbook" href="#cookbook"><span class="big">Cookbook</span></a>
     </div>
   </section>
 
@@ -440,15 +416,11 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
       <h1>Cookbook</h1>
     </header>
 
-    <div class="block" style="padding-top:0">
+    <div class="block sheets" style="padding-top:0">
       <a class="sheet mine" href="https://docs.google.com/spreadsheets/d/1dvr_rHPHTu8d0ujAIZJCakSGyKyVt1v44r8kMiDIYLg/edit" target="_blank" rel="noopener">
-        <span class="ico"><svg><use href="#i-out"/></svg></span>
-        <span class="eyebrow">Dan Faber</span>
         <span class="big">My Cookbook</span>
       </a>
       <a class="sheet shad" href="https://docs.google.com/spreadsheets/d/16Q4UpvIyHl24bnxDH0J5F9yDHBwHiGc_6cZv8QAhkqU/edit?usp=sharing" target="_blank" rel="noopener">
-        <span class="ico"><svg><use href="#i-out"/></svg></span>
-        <span class="eyebrow">Shad Tidler</span>
         <span class="big">Shad's Cookbook</span>
       </a>
     </div>
@@ -646,7 +618,7 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
     document.getElementById("fill").style.width = pct + "%";
     document.getElementById("track").setAttribute("aria-valuenow", String(Math.min(a, GOAL)));
     document.getElementById("meter").classList.toggle("hit", a >= GOAL);
-    document.getElementById("tileCount").textContent = a + " of " + GOAL + " attempts today";
+    var tc = document.getElementById("tileCount"); if (tc) tc.textContent = a + " of " + GOAL + " attempts today";
     document.querySelectorAll("[data-val]").forEach(function(el){
       var v = state.counts[el.getAttribute("data-val")];
       el.textContent = v; el.classList.toggle("zero", v === 0);
@@ -804,7 +776,7 @@ textarea.fallback{width:100%;min-height:220px;border-radius:12px;border:1px soli
     document.getElementById("setupFill").style.width = Math.round(n / SETUP_TOTAL * 100) + "%";
     document.getElementById("setupTrack").setAttribute("aria-valuenow", String(n));
     document.getElementById("setupMeter").classList.toggle("hit", n === SETUP_TOTAL);
-    document.getElementById("setupTile").textContent = n + " of " + SETUP_TOTAL + " in place";
+    var st = document.getElementById("setupTile"); if (st) st.textContent = n + " of " + SETUP_TOTAL + " in place";
   }
   var setupRef = null, setupTimer = null, setupWriting = false, setupAgain = false;
   function pushSetup(){
